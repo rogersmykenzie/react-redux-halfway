@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {updateFavShow} from './redux/reducers/showReducer';
+import CharacterList from './components/CharacterList';
 import './App.css';
 
 class App extends React.Component {
@@ -15,14 +16,16 @@ class App extends React.Component {
       <div>
         <input placeholder='Favorite Show' onChange={this.handleFavShow} />
         <h1>Favorite Show: {this.props.favShow}</h1>
+        <CharacterList />
       </div>
     )
   }
 }
 
 function mapStateToProps(reduxState) {
+  console.log(reduxState)
   return {
-    favShow: reduxState.favShow
+    favShow: reduxState.showReducer.favShow
   }
 }
 
