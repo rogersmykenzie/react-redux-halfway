@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
+import {connect} from 'react-redux';
+import {updateFavShow} from './redux/reducers/showReducer';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  handleFavShow = e => {
+    this.props.updateFavShow(e.target.value);
+  }
+  
+  render() {
+    console.log(this.props);
+    return (
+      <div>
+        <input placeholder='Favorite Show' onChange={this.handleFavShow} />
+        <h1>Favorite Show: {this.props.favShow}</h1>
+      </div>
+    )
+  }
 }
 
-export default App;
+function mapStateToProps(reduxState) {
+  return {
+    favShow: reduxState.favShow
+  }
+}
+
+export default connect(mapStateToProps, { updateFavShow })(App);
