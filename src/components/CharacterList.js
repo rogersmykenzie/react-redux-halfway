@@ -1,12 +1,6 @@
 import React from 'react';
-import {getStarWarsCharacters} from '../redux/reducers/starWarsReducer';
-import {connect} from 'react-redux';
-import { tsThisType } from '@babel/types';
 
 class CharacterList extends React.Component {
-    componentDidMount() {
-        this.props.getStarWarsCharacters();
-    }
     
     render() {
         return (
@@ -26,12 +20,6 @@ class CharacterList extends React.Component {
                     <h1>Star Wars Characters</h1>
                     <div>
                         {/* Star Wars Characters Here */}
-                        {this.props.loading === true ? 
-                        <h1>Loading...</h1>
-                        : null}
-                        {this.props.characters.map(val => {
-                            return <h1>{val.name}</h1>
-                        })}
                     </div>
                 </aside>
             </div>
@@ -39,11 +27,4 @@ class CharacterList extends React.Component {
     }
 }
 
-function mapStateToProps(reduxState) {
-    return {
-        characters: reduxState.starWarsReducer.characters,
-        loading: reduxState.starWarsReducer.loading
-    }
-}
-
-export default connect(mapStateToProps, { getStarWarsCharacters })(CharacterList);
+export default CharacterList;
